@@ -29,6 +29,9 @@ void update_fields(int *p, unsigned char c)
 	unsigned int mask = (0x3 << 17);
 
 	printf("Mask value is: " PRINT_BINARY32"\n", PRINT_BYTE32(mask));
+	printf("~Mask value is: " PRINT_BINARY32"\n", PRINT_BYTE32(~mask));
+	printf("*p & ~mask is: " PRINT_BINARY32"\n", PRINT_BYTE32(*p & ~mask));
+	printf("((c << 17) & mask) is: " PRINT_BINARY32"\n", PRINT_BYTE32((c << 17) & mask));
 
 	*p = (*p & ~mask) | ((c << 17) & mask);
 	printf("Value is: " PRINT_BINARY32"\n", PRINT_BYTE32(*p));
@@ -36,11 +39,11 @@ void update_fields(int *p, unsigned char c)
 
 void main()
 {
-	int val = 458752;
-	unsigned char c = 1;
+	int val = 458767;
+	unsigned char c = 0;
 
 
-	printf("Binary value of %u is: " PRINT_BINARY32"\n", val, PRINT_BYTE32(val));
+	printf("Value of %u is: " PRINT_BINARY32"\n", val, PRINT_BYTE32(val));
 	update_fields(&val, c);
 	printf("Output value of %u is: " PRINT_BINARY32"\n", val, PRINT_BYTE32(val));
 }
